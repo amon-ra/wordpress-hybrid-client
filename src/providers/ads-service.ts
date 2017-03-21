@@ -43,8 +43,8 @@ export class AdsService {
             }
         }
         for (const elem of data){
-            if (elem.acf.modal != null && elem.acf.modal.time != null &&
-                elem.acf.modal.content != null && elem.acf.modal.title != null){
+            if ( elem.acf.modal_time != null &&
+                elem.acf.modal_content != null && elem.acf.modal_title != null){
                 this.setModal(type,elem.id,elem.acf.modal.time);
                 break;
             }

@@ -12,7 +12,7 @@
         <span color="primary" >{{ 'cancel' | translate }}</span>
       </button>
     </ion-buttons>
-    <ion-title>{{ (stream$ | async)?.acf.modal.title | translate }}</ion-title>
+    <ion-title>{{ (stream$ | async)?.acf.modal_title | translate }}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="dismiss()" showWhen="android,core,windows">
         <ion-icon name="md-close"></ion-icon>
@@ -22,6 +22,6 @@
 
 </ion-header>
 
-<ion-content [innerHTML]='(stream$ | async)?.acf.modal.content | safeHtml'>
+<ion-content [innerHTML]='(stream$ | async)?.acf.modal_content | safeHtml'>
 
 </ion-content>

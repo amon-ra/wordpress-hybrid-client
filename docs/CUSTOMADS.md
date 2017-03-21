@@ -1,49 +1,11 @@
 ## Instalation
- 
+
 ## Introduction
 
 Custom ads have been tested with wordpress plugin WP Pro ADS and Advanced custom fields. This feature functions in this maner:
 
-- You must create a custom field for each position.
-- In configuration file asign type and diferent ads to diferent posts ids that you have created:
-```
-"ads":
-    "footer":
-    {
-        "type": "ads",
-        "id": 444,
-    },
-    "timed":{
-        "type": "ads",
-        "id": 444,
-        "time": 60,
-    },
-    "types:":[
-        {
-            "name": "movie",
-            "type": "ads",
-            "id": 444,            
-        },
-        {
-            "name": "post",
-            "type": "ads",
-            "id": 444,            
-        }        
-    ],
-    "taxonomy:":[
-        {
-            "name": "category",
-            "type": "ads",
-            "id": 444,            
-        },
-        {
-            "name": "actor",
-            "type": "ads",
-            "id": 444,            
-        }        
-    ],    
-    ""
-```
+- You must create a custom field for each position: Now it is working acf.footer, acf.modal_content, modal_title, modal_time)
+
 
 
 ## Known issues
