@@ -6,6 +6,7 @@ import { Injector } from '@angular/core';
 import _get from 'lodash/get';
 
 import { Toast, Config } from './../../providers';
+import { AdsService } from '../../providers/ads-service';
 
 export interface IListPage {
     onLoad(data: Object): void;
@@ -37,6 +38,7 @@ export class AbstractListPage {
     service: any;
     type: string;
     options: any = {};
+    ads: AdsService;
 
     constructor(
         public injector: Injector
@@ -45,13 +47,14 @@ export class AbstractListPage {
         this.navParams = injector.get(NavParams, NavParams);
         this.toast = injector.get(Toast, Toast);
         this.translate = injector.get(TranslateService, TranslateService);
+        this.ads= injector.get(AdsService,AdsService);
         this.perPage = this.config.getApi('perPage', 5);
         this.updateItemsToDisplay();
     }
 
     ionViewDidLoad() {
         console.log('[ListPage] init');
-        let currentList;
+        let currentList=[];
         this.store$.take(1).subscribe(listParams => currentList = _get(listParams, 'list', []));
         if (!currentList.length) {
             this.doLoad();
@@ -112,11 +115,13 @@ export class AbstractListPage {
             .map((r) => {
                 this.shouldRetry = false;
                 const totalPages = parseInt(r.headers.get('x-wp-totalpages'));
+                const data=r.json();
+                this.ads.update(this.type,data);
                 this.onLoad({
                     page: nextPage,
                     totalPages,
                     totalItems: parseInt(r.headers.get('x-wp-total')),
-                    list: r.json()
+                    list: data
                 });
                 this.page = nextPage;
                 this.init = true;
@@ -162,4 +167,4 @@ export class AbstractListPage {
     }
 
     trackById = (index: number, item) => item.id;
-}  
+}

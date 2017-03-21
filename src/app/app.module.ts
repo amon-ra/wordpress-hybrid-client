@@ -24,6 +24,7 @@ import { STORE } from '../store';
 import { COMPONENTS } from '../components';
 import { PAGES, DeepLinkerLnks } from '../pages';
 import { PROVIDERS, Config } from '../providers';
+import { SafeHtmlPipe } from "../utils/safehtml";
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -35,8 +36,8 @@ export function WpApiLoaderFactory(http: Http, config: Config) {
   return new WpApiStaticLoader(http, config.getApi('baseUrl', ''), config.getApi('namespace', ''));
 }
 
-@NgModule({ 
-  declarations: [...COMPONENTS, ...PAGES, WPHC],
+@NgModule({
+  declarations: [...COMPONENTS, ...PAGES, WPHC, SafeHtmlPipe],
   imports: [
     IonicModule.forRoot(WPHC, {}, {
       links: DeepLinkerLnks
