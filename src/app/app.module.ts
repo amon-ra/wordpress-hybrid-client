@@ -24,6 +24,7 @@ import { STORE } from '../store';
 import { COMPONENTS } from '../components';
 import { PAGES, DeepLinkerLnks } from '../pages';
 import { PROVIDERS, Config } from '../providers';
+import { SocialSharing } from 'ionic-native';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -35,7 +36,7 @@ export function WpApiLoaderFactory(http: Http, config: Config) {
   return new WpApiStaticLoader(http, config.getApi('baseUrl', ''), config.getApi('namespace', ''));
 }
 
-@NgModule({ 
+@NgModule({
   declarations: [...COMPONENTS, ...PAGES, WPHC],
   imports: [
     IonicModule.forRoot(WPHC, {}, {
@@ -58,7 +59,7 @@ export function WpApiLoaderFactory(http: Http, config: Config) {
   entryComponents: [...COMPONENTS, ...PAGES, WPHC],
   providers: [
     // Storage,
-    ...PROVIDERS,
+    ...PROVIDERS,SocialSharing,
     // { provide: Settings, useFactory: provideSettings, deps: [ Storage ] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
