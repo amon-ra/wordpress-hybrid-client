@@ -29,7 +29,7 @@ api:
     baseUrl: "https://dev.julienrenaux.fr/wp-json"
     namespace: "/wp/v2"
     safehtml: false
-    filters: []
+    filters: {}
     timeout: 30000
     debounceTime: 400
     maxAttempt: 3

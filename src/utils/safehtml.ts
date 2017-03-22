@@ -5,21 +5,35 @@ import { Config } from '../providers/config';
 @Pipe({ name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform  {
   constructor(private config: Config, private sanitized: DomSanitizer) {}
-  transform(value: any, enable = false,filters = [] as string[]) {
-    console.log('safehtml');
-    console.log(enable);
-    console.log(filters);
-    console.log(value);
-    for(let regex of filters){
-      value=value.replace(regex);
+  transform(value: any, enable = false,filter_str = "") {
+    // console.log('safehtml');
+    // console.log(enable);
+    // console.log(filter_str);
+    // console.log(this.config.getApi('filters'));
+    // console.log(value);
+    let data = value;
+    if (data == null)
+      return '';
+    try{
+      let filters = JSON.parse(filter_str);
+      for(let regex in filters){
+        // console.log(regex);
+        data=data.replace(new RegExp(regex),filters[regex]);
+      }
+    }catch(e){
+      data=value;
     }
-    for(let regex of this.config.getApi('filters')){
-      value=value.replace(regex);
+    let filters = this.config.getApi('filters');
+    for(let regex in filters){
+      // console.log(regex);
+      data=data.replace(new RegExp(regex),filters[regex]);
     }
-    console.log(value);
+    // console.log(data);
     if (this.config.getApi('safehtml') == true || enable)
-      return this.sanitized.bypassSecurityTrustHtml(value);
-    else
-      return value;
+      data = this.sanitized.bypassSecurityTrustHtml(data);
+    if (data == null)
+      return '';
+    return data;
+
   }
 }

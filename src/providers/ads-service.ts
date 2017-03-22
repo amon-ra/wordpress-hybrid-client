@@ -14,7 +14,7 @@ export class AdsService {
     // private footerList: { [id: number] : string; } = {};
     // private modalList: { [id: number] : string; } = {};
     public footer: Subject<any>;
-    private modal: string;
+    private modal: any;
     // private footerId: string;
     // public footerChange: Subject<string>;
     // public footer$: Observable<any>;
@@ -34,7 +34,7 @@ export class AdsService {
 
     public update(type:string,data: Array<any>){
         console.debug("AdsService: update");
-        // console.log(data);
+        console.log(data);
         for (const elem of data){
             if (elem.acf.footer != null && elem.acf.footer.trim() != ''){
                 // this.footerList[elem.id]=elem.acf.footer
@@ -45,7 +45,11 @@ export class AdsService {
         for (const elem of data){
             if ( elem.acf.modal_time != null &&
                 elem.acf.modal_content != null && elem.acf.modal_title != null){
-                this.setModal(type,elem.id,elem.acf.modal_time);
+                let time: number;
+                time=elem.acf.modal_time;
+                if (time > 1){
+                    this.setModal(type,elem.id,time*1000);
+                }
                 break;
             }
 
@@ -56,17 +60,15 @@ export class AdsService {
 
     public setModal(type:string,elem: number,time: number){
         let stream = this.getItem(type,elem);
-        setTimeout(()=> {
+        if (this.modal && time < 1)
+            clearTimeout(this.modal);
+        this.modal = setTimeout(()=> {
             let profileModal = this.modalCtrl.create(AdsModal,stream);
             profileModal.present();
         },time);
     }
     public setFooter(type:string,elem: number){
         this.footer.next([type,elem]);
-    }
-
-    public getModal(){
-        return this.modal;
     }
 
     public getItem( type:string, elem: number){
