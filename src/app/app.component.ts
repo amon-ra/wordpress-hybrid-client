@@ -12,6 +12,7 @@ import { MenuMapping } from './../pages';
   template: `
     <menu [content]="content"></menu>
     <ion-nav #content [root]="rootPage"></ion-nav>
+    <ads-footer></ads-footer>
   `
 })
 export class WPHC {

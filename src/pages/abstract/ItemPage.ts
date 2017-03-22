@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Refresher, NavParams } from 'ionic-angular';
 import { URLSearchParams } from '@angular/http';
 import { Injector } from '@angular/core';
+import { AdsService } from '../../providers/ads-service';
 
 import { Toast, Config } from './../../providers';
 
@@ -25,6 +26,7 @@ export class AbstractItemPage {
     service: any;
     type: string;
     title: string;
+    ads: AdsService;
 
     constructor(
         public injector: Injector
@@ -33,16 +35,19 @@ export class AbstractItemPage {
         this.navParams = injector.get(NavParams, NavParams);
         this.toast = injector.get(Toast, Toast);
         this.translate = injector.get(TranslateService, TranslateService);
+        this.ads= injector.get(AdsService,AdsService);
+        // this.footer= footer;
     }
 
     ionViewDidLoad() {
-        console.log('[ItemPage] init');
+        console.debug('[ItemPage] init');
         let isItemLoaded;
         this.stream$.take(1).subscribe(item => isItemLoaded = item !== undefined);
         if (!isItemLoaded) {
             this.doLoad();
         } else {
             this.init = true;
+            this.ads.setFooter(this.type,this.navParams.data.id);
         }
     }
 
@@ -74,7 +79,9 @@ export class AbstractItemPage {
             .map((r) => {
                 this.init = true;
                 this.shouldRetry = false;
-                this.onLoad(r.json())
+                const data= r.json();
+                // console.log(this.footer);
+                this.onLoad(data);
             })
             .catch(res => {
                 this.init = true;
