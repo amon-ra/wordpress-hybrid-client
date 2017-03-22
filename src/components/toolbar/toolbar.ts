@@ -8,6 +8,7 @@ import { addBookmark, removeBookmark } from '../../actions';
 import { TaxonomiesModal } from './../../pages/taxonomies-modal/taxonomies-modal';
 import { AppState } from '../../reducers';
 import { Toast } from '../../providers';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 /*
   Generated class for the Toolbar component.
@@ -24,6 +25,7 @@ export class ToolbarComponent {
   @Input() categories: Array<Object>;
   @Input() tags: Array<Object>;
   @Input() bookmarkId: string;
+  @Input() link: string;
 
   isBookmarked$: Observable<Boolean>;
 
@@ -31,7 +33,8 @@ export class ToolbarComponent {
     private modalCtrl: ModalController,
     private store: Store<AppState>,
     private toast: Toast,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private socialSharing: SocialSharing
   ) {
     this.isBookmarked$ = this.store.select((state: AppState) => {
       return Object.keys(state.bookmarks).indexOf(this.bookmarkId) > -1;
@@ -70,6 +73,11 @@ export class ToolbarComponent {
       this.store.dispatch(addBookmark(this.bookmarkId));
       this.toast.show(this.translate.instant('BOOKMARK_ADDED'));
     }
+  }
+
+  doShare(e) {
+    e.stopPropagation();
+    this.socialSharing.share(this.translate.instant('Share:'),null,null,this.link);
   }
 
 }

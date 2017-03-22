@@ -1,7 +1,8 @@
 import { Store } from '@ngrx/store';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import { AppState, IParamsState } from './../reducers';
@@ -22,7 +23,9 @@ export class WPHC {
     public translate: TranslateService,
     public platform: Platform,
     public store: Store<AppState>,
-    public config: Config
+    public config: Config,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen
   ) {
 
     store.select('params')
@@ -73,8 +76,8 @@ export class WPHC {
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      Splashscreen.hide();
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
     });
   }
 }
