@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController, Platform } from 'ionic-angular';
-import { Toast as NativeToast } from 'ionic-native';
+import { Toast as NativeToast } from '@ionic-native/toast';
 
 import { Config } from './config';
 
