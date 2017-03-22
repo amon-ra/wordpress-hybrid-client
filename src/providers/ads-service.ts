@@ -45,7 +45,7 @@ export class AdsService {
         for (const elem of data){
             if ( elem.acf.modal_time != null &&
                 elem.acf.modal_content != null && elem.acf.modal_title != null){
-                this.setModal(type,elem.id,elem.acf.modal.time);
+                this.setModal(type,elem.id,elem.acf.modal_time);
                 break;
             }
 
