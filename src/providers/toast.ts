@@ -18,13 +18,14 @@ export class Toast {
 
   constructor(
     public toastCtrl: ToastController,
+    private nativeToast: NativeToast,
     public config: Config,
     public platform: Platform
   ) { }
 
   show(message = '') {
     if (this.platform.is('cordova')) {
-      NativeToast.show(message, `${TOAST_DURATION}`, this.config.getToast('position', TOAST_POSITION)).subscribe();
+      this.nativeToast.show(message, `${TOAST_DURATION}`, this.config.getToast('position', TOAST_POSITION)).subscribe();
     } else {
       this.toastCtrl.create({
         message,

@@ -25,6 +25,7 @@ export class ToolbarComponent {
   @Input() categories: Array<Object>;
   @Input() tags: Array<Object>;
   @Input() bookmarkId: string;
+  @Input() link: string;
 
   isBookmarked$: Observable<Boolean>;
 
@@ -76,7 +77,7 @@ export class ToolbarComponent {
 
   doShare(e) {
     e.stopPropagation();
-    this.socialSharing.share('Share',null,null,'link');
+    this.socialSharing.share(this.translate.instant('Share:'),null,null,this.link);
   }
 
 }
