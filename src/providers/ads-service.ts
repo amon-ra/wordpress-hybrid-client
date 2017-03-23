@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { Subject } from 'rxjs/Subject';
-import { Subscription }   from 'rxjs/Subscription';
 import { Config } from './config';
 import { Store } from '@ngrx/store';
 import { AppState } from '../reducers';
