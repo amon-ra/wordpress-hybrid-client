@@ -39,17 +39,39 @@ export class WPHC {
     translate.use('en')
 
     platform.ready().then(() => {
-    
-      const { enabled, debug, appId } = this.config.get(`cordova.oneSignal`, {});
-      //console.log('OneSignal init. '+ JSON.stringify(enabled));
-      if (enabled){
-        try{
+
+      //Cordova Plugin Analytics
+      try{
+        const { enabled, debug, trackId } = this.config.get(`cordova.analytics`, {});
+        //console.log('OneSignal init. '+ JSON.stringify(enabled));
+        if (enabled){
+            // Enable to debug issues.
+            if (debug){
+                console.log('Analytics set log. '+ JSON.stringify(debug));
+                // window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+            }
+
+            window["plugins"].analytics.startTrackerWithId(trackId);
+            // Call syncHashedEmail anywhere in your app if you have the user's email.
+            // This improves the effectiveness of OneSignal's "best-time" notification scheduling feature.
+            // window["plugins"].OneSignal.syncHashedEmail(oneSignal_userEmail);
+          }
+      }catch(e){
+          console.log("Error init Google Analytics");
+      }
+
+
+      //Cordova Plugin Onesignal
+      try{
+        const { enabled, debug, appId } = this.config.get(`cordova.oneSignal`, {});
+        //console.log('OneSignal init. '+ JSON.stringify(enabled));
+        if (enabled){
             // Enable to debug issues.
             if (debug){
                 console.log('OneSignal set log. '+ JSON.stringify(debug));
                 window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
             }
-            
+
             var notificationOpenedCallback = function(jsonData) {
                 console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
             };
@@ -58,17 +80,16 @@ export class WPHC {
                 .startInit(appId)
                 .handleNotificationOpened(notificationOpenedCallback)
                 .endInit();
-                
+
             // Call syncHashedEmail anywhere in your app if you have the user's email.
             // This improves the effectiveness of OneSignal's "best-time" notification scheduling feature.
-            // window["plugins"].OneSignal.syncHashedEmail(oneSignal_userEmail);  
-        }catch(e){
-            console.log("Error init OneSignal");
-        }
-        
+            // window["plugins"].OneSignal.syncHashedEmail(oneSignal_userEmail);
+          }
+      }catch(e){
+          console.log("Error init OneSignal");
       }
+
       const { page, params } = this.config.get('defaultPage', {});
-      console.log('OneSignal init. '+ JSON.stringify(page));
 
       if (page && MenuMapping[page]) { // redirect to default page
         this.nav.setRoot(MenuMapping[page], params);

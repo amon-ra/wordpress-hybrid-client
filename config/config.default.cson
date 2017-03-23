@@ -43,3 +43,21 @@ menu:
     externalLinkOptions: null # default: 'location=yes'
     exposeAsideWhen: "(min-width:900px)"
     displayIcon: true # uses config/icons/icon_48.png
+
+cordova:
+    admob:
+        enabled:false
+        android:
+            bannerID: null
+            interstitialID: null
+        ios:
+            bannerID: null
+            interstitialID: null
+    oneSignal:
+        enabled: false
+        debug: false
+        appId: "xxx"
+    analytics:
+        enabled: false
+        debug: false
+        trackId: "xxx"

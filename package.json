@@ -82,6 +82,7 @@
     "cordova-plugin-crosswalk-webview",
     "cordova-plugin-x-socialsharing",
     "onesignal-cordova-plugin",
+    "cordova-plugin-google-analytics",
     "cordova-plugin-x-toast"
   ],
   "cordovaPlatforms": [
