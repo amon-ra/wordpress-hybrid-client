@@ -49,7 +49,7 @@ export class ToolbarComponent {
       list
     });
     profileModal.present();
-  }
+  } 
 
   openCategories(e) {
     e.stopPropagation();

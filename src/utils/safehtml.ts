@@ -6,7 +6,7 @@ import { Config } from '../providers/config';
 export class SafeHtmlPipe implements PipeTransform  {
   constructor(private config: Config, private sanitized: DomSanitizer) {}
   transform(value: any, enable = false,filter_str = "") {
-    // console.log('safehtml');
+    // console.debug('safehtml');
     // console.log(enable);
     // console.log(filter_str);
     // console.log(this.config.getApi('filters'));
