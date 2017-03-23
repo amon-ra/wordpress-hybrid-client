@@ -61,3 +61,4 @@ cordova:
         enabled: false
         debug: false
         trackId: "xxx"
+        interval: 30

@@ -3,9 +3,10 @@ import { Observable } from 'rxjs';
 import { Refresher, NavParams } from 'ionic-angular';
 import { URLSearchParams } from '@angular/http';
 import { Injector } from '@angular/core';
-import { AdsService } from '../../providers/ads-service';
+import { AdsService,Analytics } from '../../providers';
 
 import { Toast, Config } from './../../providers';
+
 
 export interface IItemPage {
     onLoad(data: Object): void;
@@ -27,6 +28,7 @@ export class AbstractItemPage {
     type: string;
     title: string;
     ads: AdsService;
+    ga: Analytics;
 
     constructor(
         public injector: Injector
@@ -36,6 +38,7 @@ export class AbstractItemPage {
         this.toast = injector.get(Toast, Toast);
         this.translate = injector.get(TranslateService, TranslateService);
         this.ads= injector.get(AdsService,AdsService);
+        this.ga = injector.get(Analytics);
         // this.footer= footer;
     }
 
@@ -47,10 +50,12 @@ export class AbstractItemPage {
             this.doLoad();
         } else {
             this.init = true;
-            this.ads.setFooter(this.type,this.navParams.data.id);
         }
     }
-
+    ionViewDidEnter(){
+            this.ads.setFooter(this.type,this.navParams.data.id);
+            this.ga.trackView(this.type,this.navParams.data.id);
+    }
     setStream = (stream: Observable<any>) => this.stream$ = stream;
     setService = (service: any) => this.service = service;
     setType = (type: string) => this.type = type;

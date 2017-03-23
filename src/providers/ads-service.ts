@@ -33,26 +33,31 @@ export class AdsService {
     }
 
     public update(type:string,data: Array<any>){
-        console.debug("AdsService: update");
-        console.log(data);
-        for (const elem of data){
-            if (elem.acf.footer != null && elem.acf.footer.trim() != ''){
-                // this.footerList[elem.id]=elem.acf.footer
-                this.setFooter(type,elem.id);
-                break;
-            }
-        }
-        for (const elem of data){
-            if ( elem.acf.modal_time != null &&
-                elem.acf.modal_content != null && elem.acf.modal_title != null){
-                let time: number;
-                time=elem.acf.modal_time;
-                if (time > 1){
-                    this.setModal(type,elem.id,time*1000);
-                }
-                break;
-            }
 
+        try{
+            for (const elem of data){
+                if (elem.acf.footer != null && elem.acf.footer.trim() != ''){
+                    // this.footerList[elem.id]=elem.acf.footer
+                    this.setFooter(type,elem.id);
+                    break;
+                }
+            }
+            for (const elem of data){
+                if ( elem.acf.modal_time != null &&
+                    elem.acf.modal_content != null && elem.acf.modal_title != null){
+                    let time: number;
+                    time=elem.acf.modal_time;
+                    if (time > 1){
+                        this.setModal(type,elem.id,time*1000);
+                    }
+                    break;
+                }
+
+            }
+        }catch(e){
+            console.debug("AdsService: update");
+            console.debug(JSON.stringify(data));
+            console.debug(JSON.stringify(e));
         }
         // this.footerChange.next(this.footer);
 

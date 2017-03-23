@@ -27,6 +27,7 @@ import { PROVIDERS, Config } from '../providers';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Toast as NativeToast } from '@ionic-native/toast';
 
 import { SafeHtmlPipe } from "../utils/safehtml";
@@ -64,7 +65,7 @@ export function WpApiLoaderFactory(http: Http, config: Config) {
   entryComponents: [...COMPONENTS, ...PAGES, WPHC],
   providers: [
     // Storage,
-    ...PROVIDERS,StatusBar,SplashScreen,SocialSharing,NativeToast,
+    ...PROVIDERS,StatusBar,SplashScreen,SocialSharing,NativeToast,GoogleAnalytics,
     // { provide: Settings, useFactory: provideSettings, deps: [ Storage ] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }

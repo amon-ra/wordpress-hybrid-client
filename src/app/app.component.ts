@@ -4,7 +4,7 @@ import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from 'ng2-translate/ng2-translate';
-
+import { Analytics } from './../providers';
 import { AppState, IParamsState } from './../reducers';
 import { Config } from './../providers';
 import { MenuMapping } from './../pages';
@@ -25,7 +25,8 @@ export class WPHC {
     public store: Store<AppState>,
     public config: Config,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public ga: Analytics
   ) {
 
     store.select('params')
@@ -40,25 +41,8 @@ export class WPHC {
 
     platform.ready().then(() => {
 
-      //Cordova Plugin Analytics
-      try{
-        const { enabled, debug, trackId } = this.config.get(`cordova.analytics`, {});
-        //console.log('OneSignal init. '+ JSON.stringify(enabled));
-        if (enabled){
-            // Enable to debug issues.
-            if (debug){
-                console.log('Analytics set log. '+ JSON.stringify(debug));
-                // window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
-            }
-
-            window["plugins"].analytics.startTrackerWithId(trackId);
-            // Call syncHashedEmail anywhere in your app if you have the user's email.
-            // This improves the effectiveness of OneSignal's "best-time" notification scheduling feature.
-            // window["plugins"].OneSignal.syncHashedEmail(oneSignal_userEmail);
-          }
-      }catch(e){
-          console.log("Error init Google Analytics");
-      }
+      //Google Analytics
+      this.ga.startTracker();
 
 
       //Cordova Plugin Onesignal

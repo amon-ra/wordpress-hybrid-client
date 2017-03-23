@@ -6,7 +6,8 @@ import { Injector } from '@angular/core';
 import _get from 'lodash/get';
 
 import { Toast, Config } from './../../providers';
-import { AdsService } from '../../providers/ads-service';
+import { AdsService,Analytics  } from '../../providers';
+
 
 export interface IListPage {
     onLoad(data: Object): void;
@@ -39,6 +40,7 @@ export class AbstractListPage {
     type: string;
     options: any = {};
     ads: AdsService;
+    ga: Analytics;
 
     constructor(
         public injector: Injector
@@ -48,12 +50,15 @@ export class AbstractListPage {
         this.toast = injector.get(Toast, Toast);
         this.translate = injector.get(TranslateService, TranslateService);
         this.ads= injector.get(AdsService,AdsService);
+        this.ga = injector.get(Analytics);
         this.perPage = this.config.getApi('perPage', 5);
         this.updateItemsToDisplay();
     }
 
     ionViewDidLoad() {
         console.log('[ListPage] init');
+        console.log(this);
+
         let currentList=[];
         this.store$.take(1).subscribe(listParams => currentList = _get(listParams, 'list', []));
         if (!currentList.length) {
@@ -64,6 +69,9 @@ export class AbstractListPage {
         }
     }
 
+    ionViewDidEnter(){
+        this.ga.trackView(this.type,this.options);
+    }
     setStream = (stream: Observable<any>) => this.stream$ = stream;
     setStore = (store: Observable<any>) => this.store$ = store;
     setService = (service: any) => this.service = service;
