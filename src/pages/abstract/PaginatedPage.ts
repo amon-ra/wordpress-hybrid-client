@@ -40,7 +40,7 @@ export class AbstractListPage {
     type: string;
     options: any = {};
     ads: AdsService;
-    ga: Analytics;
+    sa: Analytics;
 
     constructor(
         public injector: Injector
@@ -50,7 +50,7 @@ export class AbstractListPage {
         this.toast = injector.get(Toast, Toast);
         this.translate = injector.get(TranslateService, TranslateService);
         this.ads= injector.get(AdsService,AdsService);
-        this.ga = injector.get(Analytics);
+        this.sa = injector.get(Analytics);
         this.perPage = this.config.getApi('perPage', 5);
         this.updateItemsToDisplay();
     }
@@ -70,7 +70,7 @@ export class AbstractListPage {
     }
 
     ionViewDidEnter(){
-        this.ga.trackView(this.type,this.options);
+        this.sa.trackView(this.type,this.options);
     }
     setStream = (stream: Observable<any>) => this.stream$ = stream;
     setStore = (store: Observable<any>) => this.store$ = store;

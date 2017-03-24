@@ -78,7 +78,7 @@ export class AdsService {
     public getItem( type:string, elem: number){
         return this.store.select(state => {
             let data= _get(state, `items[${type}][${elem}]`);
-            // console.log("AdsService Footer Store "+this.type+" "+elem);
+            console.log("AdsService Footer Store "+type+" "+elem);
             // console.log(data);
             // console.log(state);
             return data;

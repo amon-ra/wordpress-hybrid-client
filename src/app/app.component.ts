@@ -41,6 +41,17 @@ export class WPHC {
 
     platform.ready().then(() => {
 
+      const { page, params } = this.config.get('defaultPage', {});
+
+      if (page && MenuMapping[page]) { // redirect to default page
+        this.nav.setRoot(MenuMapping[page], params);
+      }
+
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+
       //Google Analytics
       this.ga.startTracker();
 
@@ -73,16 +84,6 @@ export class WPHC {
           console.log("Error init OneSignal");
       }
 
-      const { page, params } = this.config.get('defaultPage', {});
-
-      if (page && MenuMapping[page]) { // redirect to default page
-        this.nav.setRoot(MenuMapping[page], params);
-      }
-
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
     });
   }
 }

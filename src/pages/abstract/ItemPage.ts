@@ -28,7 +28,7 @@ export class AbstractItemPage {
     type: string;
     title: string;
     ads: AdsService;
-    ga: Analytics;
+    as: Analytics;
 
     constructor(
         public injector: Injector
@@ -38,7 +38,7 @@ export class AbstractItemPage {
         this.toast = injector.get(Toast, Toast);
         this.translate = injector.get(TranslateService, TranslateService);
         this.ads= injector.get(AdsService,AdsService);
-        this.ga = injector.get(Analytics);
+        this.as = injector.get(Analytics);
         // this.footer= footer;
     }
 
@@ -54,7 +54,7 @@ export class AbstractItemPage {
     }
     ionViewDidEnter(){
             this.ads.setFooter(this.type,this.navParams.data.id);
-            this.ga.trackView(this.type,this.navParams.data.id);
+            this.as.trackView(this.type,this.navParams.data.id);
     }
     setStream = (stream: Observable<any>) => this.stream$ = stream;
     setService = (service: any) => this.service = service;
