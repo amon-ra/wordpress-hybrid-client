@@ -12,8 +12,9 @@ export class AdsService {
 
     // private footerList: { [id: number] : string; } = {};
     // private modalList: { [id: number] : string; } = {};
-    public footer: Subject<any>;
+    public footer: Subject<string>;
     private modal: any;
+    private items: any;
     // private footerId: string;
     // public footerChange: Subject<string>;
     // public footer$: Observable<any>;
@@ -26,8 +27,8 @@ export class AdsService {
         // this.footerList = new Array();
         // this.modalList = new Array();
         // this.footer$ = Observable.of();
-        this.footer=new Subject<any>();
-        //this.footerId = this.config.get('ads.footer');
+        this.footer=new Subject<string>();
+        store.select('items').subscribe(data => this.items = data);
         console.debug("AdsService: Init");
     }
 
@@ -72,7 +73,12 @@ export class AdsService {
         },time);
     }
     public setFooter(type:string,elem: number){
-        this.footer.next([type,elem]);
+        console.log("setFooter");
+        let data = this.items[type][elem];
+            if (data.acf.footer)
+                this.footer.next(data.acf.footer);
+            else
+                this.footer.next('');
     }
 
     public getItem( type:string, elem: number){

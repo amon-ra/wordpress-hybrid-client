@@ -7,21 +7,19 @@ import { TranslateService } from 'ng2-translate/ng2-translate';
 import { AppState, IParamsState } from './../reducers';
 import { Config } from './../providers';
 import { MenuMapping } from './../pages';
-import { Observable } from 'rxjs';
-import { Subscription }   from 'rxjs/Subscription';
-import { AdsService } from '../providers/ads-service';
+// import { Observable } from 'rxjs';
+// import { Subscription }   from 'rxjs/Subscription';
+// import { AdsService } from '../providers/ads-service';
 
 @Component({
   template: `
     <menu [content]="content"></menu>
     <ion-nav #content [root]="rootPage"></ion-nav>
-    <ads-footer [content]='(footer$ | async)?.acf.footer' ></ads-footer>
+    <ads-footer></ads-footer>
   `
 })
 export class WPHC {
   @ViewChild(Nav) nav: Nav;
-  footer$ : Observable<any>;
-  footerChange$: Subscription;
 
   constructor(
     public translate: TranslateService,
@@ -29,8 +27,7 @@ export class WPHC {
     public store: Store<AppState>,
     public config: Config,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen,
-    public ads: AdsService
+    public splashScreen: SplashScreen
   ) {
 
     store.select('params')
@@ -87,11 +84,11 @@ export class WPHC {
       }
 
       //ads-service
-      this.footerChange$ = ads.footer.subscribe((value) => {
-        this.footer$ = ads.getItem(value[0],value[1]);
-        console.debug('AdsFooter change:');
-        // console.log(this.stream$);
-      });
+      // this.footerChange$ = ads.footer.subscribe((value) => {
+      //   this.footer$ = ads.getItem(value[0],value[1]);
+      //   console.debug('AdsFooter change:');
+      //   // console.log(this.stream$);
+      // });
     });
   }
 }

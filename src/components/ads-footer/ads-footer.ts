@@ -13,8 +13,8 @@ import { Observable } from 'rxjs';
   templateUrl: 'ads-footer.html'
 })
 export class AdsFooterComponent {
-  @Input() content: string;
-  stream$: Observable<any>;
+  //@Input() : String;
+  footer: string;
   _subscription: Subscription;
 
 
@@ -25,8 +25,8 @@ export class AdsFooterComponent {
     //ads.setFooter("pages",205);
     //this.stream$ = ads.getFooter(205);
     this._subscription = ads.footer.subscribe((value) => {
-      this.stream$ = ads.getItem(value[0],value[1]);
-      console.debug('AdsFooter change:');
+      this.footer = value;
+      console.log("AdsFooter:"+value);
       // console.log(this.stream$);
     });
   }
