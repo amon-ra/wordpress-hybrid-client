@@ -3,6 +3,7 @@
 
   See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
   for more info on Angular 2 Components.
+  (stream$ | async)?.acf.footer
 -->
-<ion-footer [innerHTML]='(stream$ | async)?.acf.footer | safeHtml:true'>
+<ion-footer [innerHTML]='content | safeHtml:true'>
 </ion-footer>

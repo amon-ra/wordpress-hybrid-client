@@ -54,6 +54,7 @@ export class AbstractItemPage {
     }
     ionViewDidEnter(){
             this.ads.setFooter(this.type,this.navParams.data.id);
+            console.log(this.navParams);
             this.as.trackView(this.type,this.navParams.data.id);
     }
     setStream = (stream: Observable<any>) => this.stream$ = stream;

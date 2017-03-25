@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { AdsService } from '../../providers/ads-service';
 import { Subscription }   from 'rxjs/Subscription';
 import { Observable } from 'rxjs';
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   templateUrl: 'ads-footer.html'
 })
 export class AdsFooterComponent {
-
+  @Input() content: string;
   stream$: Observable<any>;
   _subscription: Subscription;
 

@@ -70,6 +70,7 @@ export class AbstractListPage {
     }
 
     ionViewDidEnter(){
+        console.log(this.navParams);
         this.sa.trackView(this.type,this.options);
     }
     setStream = (stream: Observable<any>) => this.stream$ = stream;
