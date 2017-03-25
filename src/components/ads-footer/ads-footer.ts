@@ -19,14 +19,14 @@ export class AdsFooterComponent {
 
 
   constructor(public ads: AdsService) {
-    console.debug('Hello AdsFooter Component');
+    //console.debug('Hello AdsFooter Component');
     // this.text = '';
     //init stream with default value
     //ads.setFooter("pages",205);
     //this.stream$ = ads.getFooter(205);
     this._subscription = ads.footer.subscribe((value) => {
       this.footer = value;
-      console.log("AdsFooter:"+value);
+      //console.log("AdsFooter:"+value);
       // console.log(this.stream$);
     });
   }

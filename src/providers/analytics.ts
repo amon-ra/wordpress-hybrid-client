@@ -42,7 +42,7 @@ export class Analytics {
           this._ga = window['ga']; //=this._ga||function(){(this._ga.q=this._ga.q||[]).push(arguments)};this._ga.l=+new Date;
 
           window['ga']('create', trackId);
-          console.log('window.ga("create",'+trackId);
+          //console.log('window.ga("create",'+trackId);
           //   this._ga('require', 'cleanUrlTracker');
         //   this._ga('require', 'eventTracker');
           this._ga('require', 'outboundLinkTracker');
@@ -62,7 +62,7 @@ export class Analytics {
         // if (element.className.indexOf('is-invisible') > -1) {
         //   throw new Error('Aborting hit');
         // }
-        // console.log(this.navParams);
+        // //console.log(this.navParams);
         model.set('page','/',true);
 
 
@@ -73,7 +73,7 @@ export class Analytics {
       //Cordova Plugin Analytics
       try{
         const { enabled, debug, trackId,interval } = this.config.get(`cordova.analytics`, {});
-        //console.log('OneSignal init. '+ JSON.stringify(enabled));
+        ////console.log('OneSignal init. '+ JSON.stringify(enabled));
         if (enabled){
             // Enable to debug issues.
 
@@ -104,16 +104,16 @@ export class Analytics {
     public debug(){
         this.store.select(state => {
             let data= _get(state, `items`);
-            // console.log("AdsService Footer Store "+this.type+" "+elem);
-            // console.log(data);
-            // console.log(state);
-            console.log(data);
+            // //console.log("AdsService Footer Store "+this.type+" "+elem);
+            // //console.log(data);
+            // //console.log(state);
+            //console.log(data);
         });
     }
     public trackView(type:string, elem: any){
         if(! this.enabled)
             return false;
-        console.log(elem);
+        //console.log(elem);
         if (elem['link']){
             this._ga('set','page',elem.link);
             // this._ga('set','title',data.title.rendered);
@@ -123,7 +123,7 @@ export class Analytics {
             this.http.get(this.wpApiLoader.getWebServiceUrl(
                 '/categories/'+elem['query']['categories']), {}).toPromise().then(
                     response => {
-                    //console.log(response.json());
+                    ////console.log(response.json());
                     let data = response.json();
                     this._ga('set','location',data.link);
                     this._ga('set','title',data.name);
@@ -134,9 +134,14 @@ export class Analytics {
         else if (typeof(elem) == "number"){
             //   this._ga.trackView(data.title.rendered,data.link);
             let data = this.items[type][elem];
-            console.log(data);
+            //console.log(data);
             this._ga('set','location',data.link);
             this._ga('set','title',data.title.rendered);
+            this._ga('send', 'pageview');
+        }
+        else{
+            this._ga('set','page','/');
+            // this._ga('set','title',data.title.rendered);
             this._ga('send', 'pageview');
         }
 
@@ -149,9 +154,9 @@ export class Analytics {
         // trackTiming(category, intervalInMilliseconds, variable, label)
         this.store.select(state => {
             let data= _get(state, `items[${type}][${elem}]`);
-            // console.log("AdsService Footer Store "+this.type+" "+elem);
-            // console.log(data);
-            // console.log(state);
+            // //console.log("AdsService Footer Store "+this.type+" "+elem);
+            // //console.log(data);
+            // //console.log(state);
             // this.ga.trackEvent(data.title.rendered,data.link,false);
         });
     }
@@ -159,9 +164,9 @@ export class Analytics {
     public getItem( type:string, elem: number){
         return this.store.select(state => {
             let data= _get(state, `items[${type}][${elem}]`);
-            // console.log("AdsService Footer Store "+this.type+" "+elem);
-            // console.log(data);
-            // console.log(state);
+            // //console.log("AdsService Footer Store "+this.type+" "+elem);
+            // //console.log(data);
+            // //console.log(state);
             return data;
         });
 

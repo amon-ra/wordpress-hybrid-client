@@ -57,7 +57,7 @@ export class AbstractListPage {
 
     ionViewDidLoad() {
         console.log('[ListPage] init');
-        console.log(this);
+        // console.log(this);
 
         let currentList=[];
         this.store$.take(1).subscribe(listParams => currentList = _get(listParams, 'list', []));
@@ -70,7 +70,7 @@ export class AbstractListPage {
     }
 
     ionViewDidEnter(){
-        console.log(this.navParams);
+        // console.log(this.navParams);
         this.sa.trackView(this.type,this.options);
     }
     setStream = (stream: Observable<any>) => this.stream$ = stream;

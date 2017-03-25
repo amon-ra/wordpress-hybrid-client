@@ -29,7 +29,7 @@ export class AdsService {
         // this.footer$ = Observable.of();
         this.footer=new Subject<string>();
         store.select('items').subscribe(data => this.items = data);
-        console.debug("AdsService: Init");
+        //console.debug("AdsService: Init");
     }
 
     public update(type:string,data: Array<any>){
@@ -55,7 +55,7 @@ export class AdsService {
 
             }
         }catch(e){
-            console.debug("AdsService: update");
+            console.debug("AdsService: update error");
             console.debug(JSON.stringify(data));
             console.debug(JSON.stringify(e));
         }
@@ -73,7 +73,7 @@ export class AdsService {
         },time);
     }
     public setFooter(type:string,elem: number){
-        console.log("setFooter");
+        // console.log("setFooter");
         let data = this.items[type][elem];
             if (data.acf.footer)
                 this.footer.next(data.acf.footer);
@@ -84,7 +84,7 @@ export class AdsService {
     public getItem( type:string, elem: number){
         return this.store.select(state => {
             let data= _get(state, `items[${type}][${elem}]`);
-            console.log("AdsService Footer Store "+type+" "+elem);
+            // console.log("AdsService Footer Store "+type+" "+elem);
             // console.log(data);
             // console.log(state);
             return data;
