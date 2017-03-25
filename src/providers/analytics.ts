@@ -119,7 +119,7 @@ export class Analytics {
             // this._ga('set','title',data.title.rendered);
             this._ga('send', 'pageview');
         }
-        else if(elem['query']['categories']){
+        else if(elem['query'] && elem['query']['categories']){
             this.http.get(this.wpApiLoader.getWebServiceUrl(
                 '/categories/'+elem['query']['categories']), {}).toPromise().then(
                     response => {
