@@ -1,0 +1,59 @@
+<!--
+  Generated template for the Posts page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <page-navbar [title]="'BOOKMARKS' | translate">
+    <button *ngIf="hasBookmarks" ion-button icon-only (click)="doRemoveAll($event)">
+      <ion-icon name="trash"></ion-icon>
+    </button>
+  </page-navbar>
+</ion-header>
+
+	<ion-content>
+		<div class="home-hello">
+			<img src="images/welcome.jpg"/>
+
+			<div class="item item-text-wrap">
+				<!--<div class="avatar">
+					<img src="images/avatar.jpg"/>
+				</div>
+				<div class="overlay">
+					<h1>{{vm.welcomeTitle}}</h1>
+					{{vm.welcomeSlogan}}
+				</div> -->
+			</div>
+		</div>
+
+		<div ng-repeat="e in vm.entries" ng-if="$index%2==0" class="row">
+
+			<div class="card col home">
+				<a class="item item-text-wrap" href="#/app/{{vm.entries[$index].path}}">
+					<h1><i class="icon {{vm.entries[$index].icon}}"></i></h1>
+					<h2>{{vm.entries[$index].title}}</h2>
+				</a>
+			</div>
+
+			<div class="card col home">
+				<a class="item item-text-wrap" href="#/app/{{vm.entries[$index + 1].path}}">
+					<h1><i class="icon {{vm.entries[$index + 1].icon}}"></i></h1>
+					<h2>{{vm.entries[$index + 1].title}}</h2>
+				</a>
+			</div>
+
+		</div>
+
+		<h2 style="padding-left: 20px;">Síguenos</h2>
+		<div class="list card" style="margin-top: 0;">
+			<button class="item item-icon-left" onclick="window.plugins.socialsharing.shareViaWhatsAppToReceiver('+34655120120', 'Message via WhatsApp', null /* img */, null /* url */, function() {console.log('share ok')});">
+				<i class="icon ion-social-whatsapp"></i>
+				Whatsapp
+			</button>
+			<ion-item class="item item-icon-left" ng-repeat="item in vm.followUsItems" ng-click="vm.openLink(item.url)">
+				<i class="icon {{item.icon}}"></i>
+				{{item.title}}
+			</ion-item>
+		</div>
+	</ion-content>
