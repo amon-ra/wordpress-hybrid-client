@@ -53,7 +53,7 @@ export class AbstractItemPage {
         }
     }
     ionViewDidEnter(){
-            this.ads.setFooter(this.type,this.navParams.data.id);
+            this.ads.update(this.type,this.navParams.data.id);
             console.log(this.navParams);
             this.as.trackView(this.type,this.navParams.data.id);
     }
@@ -103,7 +103,7 @@ export class AbstractItemPage {
             this.fetch().take(1).subscribe(() => { }, () => { });
         }catch(e){
             console.log(e);
-        }            
+        }
     }
 
     doRefresh(refresher: Refresher): void {

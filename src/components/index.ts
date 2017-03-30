@@ -23,7 +23,7 @@ import { MenuItemsComponent } from './menu-items/menu-items';
 import { EmptyListComponent } from './empty-list/empty-list';
 import { PageNavbarComponent } from './page-navbar/page-navbar';
 import { AdsFooterComponent } from './ads-footer/ads-footer';
-
+import { AdsModal } from './ads-modal/ads-modal';
 import {
     ComponentsMapping as CustomComponentsMapping,
     COMPONENTS as CustomCOMPONENTS
@@ -65,5 +65,6 @@ export const COMPONENTS = [
     BookmarksComponent,
     PageNavbarComponent,
     AdsFooterComponent,
+    AdsModal,
     ...CustomCOMPONENTS
 ];

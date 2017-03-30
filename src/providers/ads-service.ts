@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { Config } from './config';
 import { Store } from '@ngrx/store';
 import { AppState } from '../reducers';
-import { AdsModal } from '../pages/ads-modal/ads-modal';
+import { AdsModal } from '../components/ads-modal/ads-modal';
 import _get from 'lodash/get';
 
 @Injectable()
@@ -32,27 +32,17 @@ export class AdsService {
         //console.debug("AdsService: Init");
     }
 
-    public update(type:string,data: Array<any>){
-
+    public update(type:string,data: Array<number>){
+        if (typeof(data) == "number")
+            data=[data];
         try{
             for (const elem of data){
-                if (elem.acf.footer != null && elem.acf.footer.trim() != ''){
-                    // this.footerList[elem.id]=elem.acf.footer
-                    this.setFooter(type,elem.id);
+                    if (this.setFooter(type,elem))
                     break;
-                }
             }
             for (const elem of data){
-                if ( elem.acf.modal_time != null &&
-                    elem.acf.modal_content != null && elem.acf.modal_title != null){
-                    let time: number;
-                    time=elem.acf.modal_time;
-                    if (time > 1){
-                        this.setModal(type,elem.id,time*1000);
-                    }
+                    if (this.setModal(type,elem))
                     break;
-                }
-
             }
         }catch(e){
             console.debug("AdsService: update error");
@@ -63,22 +53,40 @@ export class AdsService {
 
     }
 
-    public setModal(type:string,elem: number,time: number){
-        let stream = this.getItem(type,elem);
-        if (this.modal && time < 1)
-            clearTimeout(this.modal);
-        this.modal = setTimeout(()=> {
-            let profileModal = this.modalCtrl.create(AdsModal,stream);
-            profileModal.present();
-        },time);
+    public setModal(type:string,elem: number){
+        try{
+            var data = this.items[type][elem];
+            if (data.acf.modal_content != null && data.acf.modal_content.trim() != ''){
+                let time = 2*1000;
+                if (data.acf.modal_time)
+                    time=data.acf.modal_time * 1000;
+                if (this.modal)
+                    clearTimeout(this.modal);
+                this.modal = setTimeout(()=> {
+                    let profileModal = this.modalCtrl.create(AdsModal,
+                        { content: data.acf.modal_content, title: data.acf.modal_title });
+                    profileModal.present();
+                },time);
+                return true;
+            }
+        }catch(e){
+            console.log(e);
+        }
+
     }
     public setFooter(type:string,elem: number){
         // console.log("setFooter");
-        let data = this.items[type][elem];
-            if (data.acf.footer)
+        try{
+            let data = this.items[type][elem];
+            if (data.acf.footer != null && data.acf.footer.trim() != ''){
                 this.footer.next(data.acf.footer);
-            else
-                this.footer.next('');
+                return true;
+            }
+        }catch(e){
+            console.log(e);
+        }
+        this.footer.next('');
+        return false;
     }
 
     public getItem( type:string, elem: number){

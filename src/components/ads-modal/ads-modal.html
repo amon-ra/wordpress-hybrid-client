@@ -1,0 +1,29 @@
+<!--
+  Generated template for the AdsModal component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()" showWhen="ios">
+        <span color="primary" >{{ 'cancel' | translate }}</span>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ title | translate }}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()" showWhen="android,core,windows">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header> -->
+
+<ion-content>
+        <i class="ion-ios-close-outline popuoclose " (click)="dismiss()"></i>  
+  <div  class="ads-modal-content" [innerHTML]='content | safeHtml:true'>
+  </div>
+</ion-content>
