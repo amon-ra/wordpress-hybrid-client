@@ -4,14 +4,14 @@ import { Subject } from 'rxjs/Subject';
 import { Config } from './config';
 // import { Store } from '@ngrx/store';
 // import { AppState } from '../reducers';
-import _get from 'lodash/get';
+// import _get from 'lodash/get';
 
 @Injectable()
 export class StreamService {
 
     stream = {};
     isPlaying: string;
-    info: Subject;
+    info: Subject<any>;
     timer: any;
   //   streamUrl: string;
   //   metadataUrl: string;

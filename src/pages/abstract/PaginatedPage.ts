@@ -124,8 +124,10 @@ export class AbstractListPage {
             .map((r) => {
                 this.shouldRetry = false;
                 const totalPages = parseInt(r.headers.get('x-wp-totalpages'));
+                console.log(r);
                 const data=r.json();
-                this.ads.update(this.type,data);
+                console.log(data);
+
                 this.onLoad({
                     page: nextPage,
                     totalPages,
@@ -136,6 +138,7 @@ export class AbstractListPage {
                 this.init = true;
                 this.isPaginationEnabled = true;
                 this.updateItemsToDisplay();
+                // this.ads.update(this.type,data);
                 return totalPages <= nextPage;
             })
             .catch(res => {
@@ -150,12 +153,20 @@ export class AbstractListPage {
     }
 
     doLoad(): void {
-        this.fetch().take(1).subscribe();
+        try{
+          this.fetch().take(1).subscribe();
+        }catch(e){
+            console.log(e);
+        }
     }
 
     doRefresh(refresher: Refresher): void {
         this.onClean();
-        this.fetch().take(1).subscribe(() => refresher.complete(), (error) => refresher.complete());
+        try{
+            this.fetch().take(1).subscribe(() => refresher.complete(), (error) => refresher.complete());
+        }catch(e){
+            console.log(e);
+        }
     }
 
     doInfinite(infiniteScroll: InfiniteScroll): void {

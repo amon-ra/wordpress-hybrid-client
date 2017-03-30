@@ -62,3 +62,5 @@ cordova:
         debug: false
         trackId: "xxx"
         interval: 'auto'
+        name: 'Your Blog title'
+        version: 1

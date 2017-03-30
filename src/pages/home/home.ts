@@ -16,10 +16,10 @@ import { ItemPage } from './../item/item';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-bookmarks',
-  templateUrl: 'bookmarks.html'
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
-export class BookmarksPage {
+export class HomePage {
   page: number = 0;
   hasBookmarks: boolean = false;
   stream$: Observable<any>;

@@ -56,8 +56,8 @@ export class AdsService {
             }
         }catch(e){
             console.debug("AdsService: update error");
-            console.debug(JSON.stringify(data));
-            console.debug(JSON.stringify(e));
+            console.log(data);
+            console.log(e);
         }
         // this.footerChange.next(this.footer);
 

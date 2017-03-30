@@ -84,8 +84,11 @@
     "cordova-plugin-crosswalk-webview",
     "cordova-plugin-x-socialsharing",
     "onesignal-cordova-plugin",
-    "cordova-plugin-google-analytics",
-    "cordova-plugin-x-toast"
+    "cordova-plugin-x-toast",
+    {
+      "locator": "https://github.com/skounis/cordova-audio-stream-plugin",
+      "id": "com.keosu.cordova.stream"
+    }
   ],
   "cordovaPlatforms": [
     {

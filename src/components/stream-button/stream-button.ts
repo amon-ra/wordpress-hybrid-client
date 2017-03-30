@@ -1,7 +1,7 @@
 import { Component,Input } from '@angular/core';
 import { StreamService } from '../../providers/stream-service';
-import { Subscription }   from 'rxjs/Subscription';
-import { Observable } from 'rxjs';
+// import { Subscription }   from 'rxjs/Subscription';
+// import { Observable } from 'rxjs';
 /*
   Generated class for the AdsFooter component.
 

@@ -99,12 +99,20 @@ export class AbstractItemPage {
 
     doLoad = (): void => {
         console.log('[ItemPage] doLoad');
-        this.fetch().take(1).subscribe(() => { }, () => { });
+        try{
+            this.fetch().take(1).subscribe(() => { }, () => { });
+        }catch(e){
+            console.log(e);
+        }            
     }
 
     doRefresh(refresher: Refresher): void {
         console.log('[ItemPage] doRefresh');
-        this.fetch().take(1).subscribe(() => refresher.complete(), (error) => refresher.complete());
+        try{
+            this.fetch().take(1).subscribe(() => refresher.complete(), (error) => refresher.complete());
+        }catch(e){
+            console.log(e);
+        }
     }
 
 }
