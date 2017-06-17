@@ -45,6 +45,7 @@ export class Analytics {
 
           if (!enabled){
             this.status = 2;
+            console.log("GA disabled");
             return false;
           }
 
@@ -53,6 +54,22 @@ export class Analytics {
             window['ga_debug'] = {trace: true};
             ga_url = 'https://www.google-analytics.com/analytics_debug.js';
           }
+
+  //   <!-- Google Tag Manager -->
+  //   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  //     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  //     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  //     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  //     })(window,document,'script','dataLayer','GTM-KBSB5N');
+  //   </script>
+  //   <!-- End Google Tag Manager -->
+  // </head>
+  // <body>
+  //   <!-- Google Tag Manager (noscript) -->
+  //   <noscript>
+  //     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KBSB5N"
+  //     height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  //   </noscript>
 
           (function (i, s, o, g, r, a, m) {
           i['GoogleAnalyticsObject'] = r;
@@ -68,7 +85,8 @@ export class Analytics {
 
           // window['ga'] = window['ga']; //=window['ga']||function(){(window['ga'].q=window['ga'].q||[]).push(arguments)};window['ga'].l=+new Date;
 
-          window['ga']('create', trackId,interval);
+          window['ga']('create', trackId,{'cookieDomain': 'none','storage':'none'}); //interval
+          window['ga']('set', 'checkProtocolTask', function(){ /* nothing */ });
           window['ga']('set', 'appName', name);
           window['ga']('set', 'appVersion', version);
           window['ga']('set', 'source', '(app)');

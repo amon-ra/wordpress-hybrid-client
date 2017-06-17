@@ -6,11 +6,13 @@ ads-modal .scroll-content {
 }
 ads-modal i {
     font-size: 7rem;
-    margin-left: 91%;
+    margin-left: 84%;
+    top: 1rem;
+    position: absolute;
 }
 .ads-modal-content{
   width:100vw;
   height: 100vh;
-  margin-top: -10px;
-  overflow: hidden;
+  // margin-top: -8rem;
+  // overflow: hidden;
 }
